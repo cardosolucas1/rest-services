@@ -1,6 +1,14 @@
 module.exports = app => {
-  const controller = require('../controllers/products')();
+  const productsController = require('../controllers/products')
 
   app.route('/api/products')
-    .get(controller.products);
+    .get(productsController.getAllProducts)
+    .post((req, res) => productsController.createProduct(req,res))
+
+  app.route('/api/products/:id')
+  .get(productsController.getProductById)
+  .delete(productsController.deleteProduct)
+
+  app.route('/api/product')
+  .put(productsController.updateProduct)
 }
